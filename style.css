@@ -1,0 +1,28 @@
+#map {
+    display: inline-block;
+    border: 2px solid #333;
+    padding: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Ajout d'une ombre douce */
+}
+
+.tile {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    margin: -1px;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Ombre douce sur chaque tuile */
+}
+
+.floor {
+    background-color: #000; /* Sol en noir */
+}
+
+.wall {
+    background-color: #333; /* Murs légèrement plus foncés */
+}
+
+.empty {
+    background-color: #fff;
+}
