@@ -2,25 +2,26 @@
     display: inline-block;
     border: 2px solid #333;
     padding: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Ajout d'une ombre douce */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background-color: #2c3e50; /* Couleur de fond légèrement plus foncée */
 }
 
 .tile {
     width: 30px;
     height: 30px;
     display: inline-block;
-    border: 1px solid #ccc;
-    margin: -1px;
-    box-sizing: border-box;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Ombre douce sur chaque tuile */
+    border: 1px solid #888;
+    box-sizing: content-box; /* Garder les dimensions spécifiées */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3); /* Légère ombre intérieure pour donner du relief */
+    vertical-align: top; /* Aligner les tuiles en haut de la ligne */
 }
 
 .floor {
-    background-color: #000; /* Sol en noir */
+    background-color: #DFAF2C;
 }
 
 .wall {
-    background-color: #333; /* Murs légèrement plus foncés */
+    background-color: #7f8c8d; /* Couleur de mur gris légèrement plus foncé */
 }
 
 .empty {
