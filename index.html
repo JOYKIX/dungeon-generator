@@ -1,20 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Cave Generator</title>
+    <title>Générateur de cave RPG Maker</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="map"></div>
-    <div id="controls">
-        <label for="width">Width:</label>
-        <input type="number" id="width" value="30">
-        <label for="height">Height:</label>
-        <input type="number" id="height" value="20">
-        <button id="generateBtn">Generate</button>
-    </div>
+    <main class="app">
+        <section class="panel">
+            <h1>Générateur procédural de cave</h1>
+            <p class="subtitle">Optimisé pour un rendu type RPG Maker: sol, rebords, murs frontaux et ombres.</p>
+
+            <div class="controls-grid">
+                <label>
+                    Largeur
+                    <input type="number" id="width" min="12" max="120" value="42">
+                </label>
+                <label>
+                    Hauteur
+                    <input type="number" id="height" min="12" max="120" value="28">
+                </label>
+                <label>
+                    Taille tuile
+                    <input type="number" id="tileSize" min="12" max="48" value="24">
+                </label>
+                <label>
+                    Densité roche
+                    <input type="range" id="density" min="30" max="65" value="46">
+                    <span id="densityValue">46%</span>
+                </label>
+                <label>
+                    Itérations auto-cellulaire
+                    <input type="number" id="iterations" min="1" max="10" value="5">
+                </label>
+                <label>
+                    Seed (optionnel)
+                    <input type="text" id="seed" placeholder="laisse vide pour aléatoire">
+                </label>
+            </div>
+
+            <div class="toggles">
+                <label><input type="checkbox" id="showFrontWalls" checked> Générer les murs frontaux (perspective)</label>
+                <label><input type="checkbox" id="showSideShading" checked> Ajouter les ombres latérales</label>
+            </div>
+
+            <div class="actions">
+                <button id="generateBtn">Générer</button>
+                <button id="randomSeedBtn" class="secondary">Seed aléatoire</button>
+                <button id="copyBtn" class="secondary">Copier JSON</button>
+            </div>
+
+            <p id="stats" class="stats"></p>
+        </section>
+
+        <section class="canvas-wrap">
+            <div id="map" aria-label="Carte procédurale" role="img"></div>
+        </section>
+    </main>
+
     <script src="script.js"></script>
 </body>
 </html>
