@@ -6,13 +6,6 @@
     --line: #3f4f65;
     --text: #ecf3ff;
     --muted: #a9b6c9;
-    --accent: #46b3ff;
-    --floor-a: #8e6d3d;
-    --floor-b: #785a30;
-    --rock-a: #29313f;
-    --rock-b: #1b2230;
-    --wall-front-a: #556477;
-    --wall-front-b: #3e4b5c;
 }
 
 * {
@@ -27,11 +20,11 @@ body {
 }
 
 .app {
-    max-width: 1400px;
+    max-width: 1520px;
     margin: 0 auto;
     padding: 1rem;
     display: grid;
-    grid-template-columns: minmax(320px, 400px) 1fr;
+    grid-template-columns: minmax(320px, 410px) 1fr;
     gap: 1rem;
 }
 
@@ -68,7 +61,8 @@ label {
 }
 
 input[type="number"],
-input[type="text"] {
+input[type="text"],
+select {
     border: 1px solid var(--line);
     border-radius: 8px;
     padding: 0.5rem 0.65rem;
@@ -80,7 +74,7 @@ input[type="range"] {
     width: 100%;
 }
 
-#densityValue {
+#intensityValue {
     color: var(--muted);
     font-size: 0.82rem;
 }
@@ -125,10 +119,36 @@ button:hover {
 }
 
 .stats {
-    margin-bottom: 0;
+    margin-bottom: 0.75rem;
     margin-top: 0.9rem;
     color: var(--muted);
     font-size: 0.88rem;
+}
+
+.legend {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.38rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+    border: 1px solid #304258;
+    border-radius: 999px;
+    padding: 0.2rem 0.5rem;
+    background: #101a27;
+}
+
+.legend-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    display: inline-block;
+    border: 1px solid rgb(0 0 0 / 26%);
 }
 
 .canvas-wrap {
@@ -152,40 +172,49 @@ button:hover {
     border: 1px solid rgb(0 0 0 / 14%);
 }
 
-.floor {
-    background: linear-gradient(145deg, var(--floor-a), var(--floor-b));
+#map.show-grid .tile {
+    border: 1px solid rgb(255 255 255 / 8%);
 }
 
-.rock {
-    background: linear-gradient(135deg, var(--rock-a), var(--rock-b));
-}
+.tile-cave-floor { background: linear-gradient(145deg, #8e6d3d, #785a30); }
+.tile-cave-rock { background: linear-gradient(135deg, #29313f, #1b2230); }
+.tile-tree { background: radial-gradient(circle at 30% 30%, #4c8b4a 0 35%, #2f5f2d 100%); }
+.tile-grass { background: linear-gradient(135deg, #5f924e, #4a7a3f); }
+.tile-water { background: linear-gradient(150deg, #2d80be, #1d4f9d); }
+.tile-road { background: linear-gradient(135deg, #817566, #64594d); }
+.tile-building { background: linear-gradient(135deg, #898fa1, #686d79); }
+.tile-plaza { background: linear-gradient(145deg, #b5b9c3, #8f95a0); }
+.tile-garden { background: linear-gradient(145deg, #7db067, #5d894a); }
+.tile-ruin { background: linear-gradient(145deg, #7c736a, #5f5650); }
+.tile-mud { background: linear-gradient(145deg, #5a4c3d, #463a2e); }
+.tile-reed { background: linear-gradient(145deg, #707e42, #525d2d); }
+.tile-water-dark { background: linear-gradient(145deg, #27556b, #17364a); }
+.tile-dead-tree { background: radial-gradient(circle at 30% 30%, #7a6b5a 0 32%, #4f4439 100%); }
 
-.wall-front {
-    background: linear-gradient(180deg, var(--wall-front-a), var(--wall-front-b));
-}
-
-.wall-front::after {
+.shade-right::before,
+.shade-left::after,
+.shade-top::after {
     content: "";
     position: absolute;
-    inset: auto 0 0 0;
-    height: 25%;
-    background: rgb(0 0 0 / 22%);
+    pointer-events: none;
 }
 
-.shadow-right::before {
-    content: "";
-    position: absolute;
+.shade-right::before {
     inset: 0 0 0 auto;
-    width: 20%;
-    background: rgb(0 0 0 / 20%);
+    width: 16%;
+    background: rgb(0 0 0 / 19%);
 }
 
-.shadow-left::after {
-    content: "";
-    position: absolute;
+.shade-left::after {
     inset: 0 auto 0 0;
-    width: 14%;
-    background: rgb(255 255 255 / 7%);
+    width: 13%;
+    background: rgb(255 255 255 / 5%);
+}
+
+.shade-top::after {
+    inset: 0 0 auto 0;
+    height: 11%;
+    background: rgb(255 255 255 / 5%);
 }
 
 @media (max-width: 980px) {

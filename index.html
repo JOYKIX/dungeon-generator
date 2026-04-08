@@ -3,36 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Générateur de cave RPG Maker</title>
+    <title>Générateur procédural RPG (cave, forêt, ville, ruines, marais)</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main class="app">
         <section class="panel">
-            <h1>Générateur procédural de cave</h1>
-            <p class="subtitle">Optimisé pour un rendu type RPG Maker: sol, rebords, murs frontaux et ombres.</p>
+            <h1>Générateur procédural RPG avancé</h1>
+            <p class="subtitle">Cave, forêt, ville, ruines et marais avec seed contrôlable et export JSON.</p>
 
             <div class="controls-grid">
                 <label>
+                    Biome
+                    <select id="biome">
+                        <option value="cave">Cave</option>
+                        <option value="forest">Forêt</option>
+                        <option value="city">Ville</option>
+                        <option value="ruins">Ruines</option>
+                        <option value="swamp">Marais</option>
+                    </select>
+                </label>
+                <label>
                     Largeur
-                    <input type="number" id="width" min="12" max="120" value="42">
+                    <input type="number" id="width" min="18" max="160" value="56">
                 </label>
                 <label>
                     Hauteur
-                    <input type="number" id="height" min="12" max="120" value="28">
+                    <input type="number" id="height" min="18" max="120" value="36">
                 </label>
                 <label>
                     Taille tuile
-                    <input type="number" id="tileSize" min="12" max="48" value="24">
+                    <input type="number" id="tileSize" min="10" max="40" value="20">
                 </label>
                 <label>
-                    Densité roche
-                    <input type="range" id="density" min="30" max="65" value="46">
-                    <span id="densityValue">46%</span>
+                    Intensité génération
+                    <input type="range" id="intensity" min="20" max="90" value="60">
+                    <span id="intensityValue">60%</span>
                 </label>
                 <label>
-                    Itérations auto-cellulaire
-                    <input type="number" id="iterations" min="1" max="10" value="5">
+                    Itérations/lissage
+                    <input type="number" id="iterations" min="1" max="12" value="5">
                 </label>
                 <label>
                     Seed (optionnel)
@@ -41,8 +51,8 @@
             </div>
 
             <div class="toggles">
-                <label><input type="checkbox" id="showFrontWalls" checked> Générer les murs frontaux (perspective)</label>
-                <label><input type="checkbox" id="showSideShading" checked> Ajouter les ombres latérales</label>
+                <label><input type="checkbox" id="showOverlay" checked> Détails visuels (ombres, reliefs, eau)</label>
+                <label><input type="checkbox" id="showGrid"> Grille légère</label>
             </div>
 
             <div class="actions">
@@ -52,6 +62,7 @@
             </div>
 
             <p id="stats" class="stats"></p>
+            <div id="legend" class="legend"></div>
         </section>
 
         <section class="canvas-wrap">
